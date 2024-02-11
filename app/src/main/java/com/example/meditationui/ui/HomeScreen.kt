@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -26,8 +27,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.meditationui.R
+import com.example.meditationui.ui.theme.ButtonBlue
 import com.example.meditationui.ui.theme.DarkerButtonBlue
 import com.example.meditationui.ui.theme.DeepBlue
+import com.example.meditationui.ui.theme.LightRed
 import com.example.meditationui.ui.theme.TextWhite
 
 @Composable
@@ -40,6 +43,7 @@ fun HomeScreen() {
         Column {
             GreetingSection()
             ChipSection(chips = listOf("Sweet sleep", "Insomnia", "Depression"))
+            CurrentMeditation()
         }
     }
 }
@@ -95,5 +99,38 @@ fun ChipSection(chips: List<String>) {
                 Text(text = chips[it], color = TextWhite)
             }
         }
+    }
+}
+
+@Composable
+fun CurrentMeditation(
+    color: Color = LightRed
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier
+            .padding(15.dp)
+            .clip(RoundedCornerShape(15.dp))
+            .background(color)
+            .padding(horizontal = 15.dp, vertical = 20.dp)
+            .fillMaxSize()
+    ) {
+        Text(text = "Daily Thought", style = MaterialTheme.typography.headlineLarge)
+        Text(text = "Meditation • 3-10 min", style = MaterialTheme.typography.bodyMedium)
+        Box(contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .background(ButtonBlue)
+                .padding(10.dp)) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_play),
+                contentDescription = "Play",
+                tint = DeepBlue,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+
     }
 }
